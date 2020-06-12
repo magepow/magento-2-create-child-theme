@@ -1,6 +1,6 @@
 {
   "name": "magepow/theme",
-  "description": "You Manage create or edit theme via admin.",
+  "description": "You Manage create or edit theme form admin.",
   "type": "magento2-module",
   "license": [
       "OSL-3.0",

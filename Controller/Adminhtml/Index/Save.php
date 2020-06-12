@@ -4,7 +4,7 @@
  * @Author: nguyen
  * @Date:   2020-05-31 14:56:43
  * @Last Modified by:   nguyen
- * @Last Modified time: 2020-06-12 11:30:33
+ * @Last Modified time: 2020-06-12 13:57:13
  */
 
 namespace Magepow\Theme\Controller\Adminhtml\Index;
@@ -37,7 +37,8 @@ class Save extends \Magepow\Theme\Controller\Adminhtml\Action
 
             $parentTheme    = $data['parent_theme'];
             $themeTitle     = $data['theme_title'];
-            $themePath      = $data['theme_path'];
+            $themePath      = isset($data['theme_path']) ? $data['theme_path'] : $model->getThemePath();
+
             if($id && in_array($themePath, $this->defaultTheme)){
                 $this->messageManager->addError(__('You can\'t edit default theme %1.', $themePath));
                 $this->_getSession()->setFormData($data);
@@ -67,7 +68,7 @@ class Save extends \Magepow\Theme\Controller\Adminhtml\Action
                     $this->_getSession()->setFormData($data);
                     return $resultRedirect->setPath('*/*/edit');
                 }
-                if($data['parent_theme'] == $data['theme_path'] || $parent->getId() == $model->getId()){
+                if($parentTheme == $themePath || $parent->getId() == $model->getId()){
                     $this->messageManager->addError(__('Error Parent theme and Child theme same value.'));
                     $this->_getSession()->setFormData($data);
                     return $resultRedirect->setPath('*/*/edit');                
@@ -86,7 +87,7 @@ class Save extends \Magepow\Theme\Controller\Adminhtml\Action
                 $data['area']          = 'frontend';
                 $data['is_featured']   = 0;
                 $data['type']          = $data['theme_type'];
-                $data['code']          = $data['theme_path'];
+                $data['code']          = $themePath;
                 if(isset($data['overwrite']) && $model->getThemeId()){
                     $model->addData($data);
                 }else {

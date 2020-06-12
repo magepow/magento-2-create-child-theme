@@ -4,7 +4,7 @@
  * @Author: nguyen
  * @Date:   2020-06-04 17:10:47
  * @Last Modified by:   nguyen
- * @Last Modified time: 2020-06-12 13:05:39
+ * @Last Modified time: 2020-06-12 14:57:42
  */
 
 namespace Magepow\Theme\Controller\Adminhtml\Index;
@@ -39,6 +39,14 @@ class Delete extends \Magepow\Theme\Controller\Adminhtml\Action
             $this->messageManager->addSuccess(
                 __('Theme record delete successfully !')
             );
+            $collection      = $this->_objectManager->create('Magento\Config\Model\ResourceModel\Config\Data\Collection');
+            $config     = $collection->addFieldToSelect('*')->addFieldToFilter('path', 'design/theme/theme_id')->addFieldToFilter('value',$id);
+            $ids   = [];
+            foreach ($config as $cfg) {
+                $cfg->setValue(2); /* Luma theme */
+                $cfg->save();
+            }
+            // $config->save();
 
         } catch (\Exception $e) {
             $this->messageManager->addError($e->getMessage());

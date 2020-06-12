@@ -4,7 +4,7 @@
  * @Author: nguyen
  * @Date:   2020-06-09 19:52:46
  * @Last Modified by:   nguyen
- * @Last Modified time: 2020-06-12 11:12:39
+ * @Last Modified time: 2020-06-12 13:31:08
  */
 
 namespace Magepow\Theme\Block\Adminhtml\Theme\Edit;
@@ -119,7 +119,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             ]
         );
 
-        $field = $fieldset->addField('theme_title', 'text',
+        $fieldset->addField('theme_title', 'text',
             [
                 'name'      => 'theme_title',
                 'label'     => __('Theme Title'),
@@ -130,7 +130,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             ]
         );
 
-        $field = $fieldset->addField('theme_path', 'text',
+        $themePath = $fieldset->addField('theme_path', 'text',
             [
                 'name'      => 'theme_path',
                 'label'     => __('Theme Path'),
@@ -141,7 +141,24 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             ]
         );
 
-        $field = $fieldset->addField('theme_type', 'select',
+        if($this->getRequest()->getParam('theme_id')){
+            $themePath->setAfterElementHtml(
+                '<p class="nm"><small>' . __('Don\'t change Theme Path') . '</small></p>
+                <script type="text/javascript">
+                require([
+                    "jquery",
+                ],  function($){
+                        jQuery(document).ready(function($) {
+                            var themePath  = "#'.$themePath->getHtmlId().'";                  
+                            if ($(themePath).val()) {$(themePath).prop("disabled", true); }
+                        })
+                })
+                </script>
+                '
+            );
+        }
+
+        $fieldset->addField('theme_type', 'select',
             [
                 'name'      => 'theme_type',
                 'label'     => __('Theme Type'),
