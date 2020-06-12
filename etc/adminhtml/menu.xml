@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+    	<update id="magepow" title="Magepow" module="Magepow_Theme" sortOrder="10" resource="Magepow_Theme::magepow"/>
+
+        	<add id="Magepow_Theme::theme" title="Themes" module="Magepow_Theme" sortOrder="10" parent="magepow" resource="Magepow_Theme::theme"/>
+
+        		<add id="Magepow_Theme::magepow_theme_index" title="Manage Theme" module="Magepow_Theme" sortOrder="10" parent="Magepow_Theme::theme" action="magepowtheme/index" resource="Magepow_Theme::magepowtheme_index" />
+    </menu>
+</config>
