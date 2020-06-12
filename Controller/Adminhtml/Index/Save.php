@@ -3,8 +3,8 @@
 /**
  * @Author: nguyen
  * @Date:   2020-05-31 14:56:43
- * @Last Modified by:   nguyen
- * @Last Modified time: 2020-06-12 13:57:13
+ * @Last Modified by:   Alex Dong
+ * @Last Modified time: 2020-06-12 16:21:00
  */
 
 namespace Magepow\Theme\Controller\Adminhtml\Index;
@@ -38,6 +38,8 @@ class Save extends \Magepow\Theme\Controller\Adminhtml\Action
             $parentTheme    = $data['parent_theme'];
             $themeTitle     = $data['theme_title'];
             $themePath      = isset($data['theme_path']) ? $data['theme_path'] : $model->getThemePath();
+            $themePath      = trim($themePath);
+            $themePath      = str_replace(' ', '_', $themePath);;
 
             if($id && in_array($themePath, $this->defaultTheme)){
                 $this->messageManager->addError(__('You can\'t edit default theme %1.', $themePath));
@@ -48,7 +50,7 @@ class Save extends \Magepow\Theme\Controller\Adminhtml\Action
                 $frontend = 'design' . DIRECTORY_SEPARATOR . 'frontend';
                 $dir = $this->_filesystem->getDirectoryWrite(DirectoryList::APP);
                 $theme = $this->_objectManager->create('Magento\Theme\Model\Theme');
-                if(!preg_match('/[a-zA-Z0-9_]*[a-zA-Z0-9_]\/[a-zA-Z0-9_]*[a-zA-Z0-9_]/', $themePath)){
+                if(!preg_match('/^[a-zA-Z0-9_]+\/+[a-zA-Z0-9_]+$/', $themePath)){
                     $this->messageManager->addError(__('Theme Path %1 wrong format', $themePath));
                     $this->_getSession()->setFormData($data);
                     return $resultRedirect->setPath('*/*/edit');
@@ -80,7 +82,7 @@ class Save extends \Magepow\Theme\Controller\Adminhtml\Action
                 }
 
                 $dir->writeFile($filePathXml, 'tmp');
-
+                $data['theme_path']    = $themePath;
                 $data['parent_id']     = $parent->getData('theme_id');
                 $data['theme_title']   = $parent->getData('theme_title');
                 $data['preview_image'] = NULL;
