@@ -4,7 +4,7 @@
  * @Author: nguyen
  * @Date:   2020-06-04 16:44:01
  * @Last Modified by:   nguyen
- * @Last Modified time: 2020-06-12 09:25:18
+ * @Last Modified time: 2020-08-08 09:37:20
  */
 
 namespace Magepow\Theme\Controller\Adminhtml;
@@ -61,6 +61,11 @@ abstract class Action extends \Magento\Backend\App\Action
     protected $_filesystem;
 
     /**
+     * @var \Magento\Framework\Filesystem\Driver\File
+     */
+    protected $_driver;
+
+    /**
      * File Factory.
      *
      * @var \Magento\Framework\App\Response\Http\FileFactory
@@ -84,6 +89,7 @@ abstract class Action extends \Magento\Backend\App\Action
         \Magento\Framework\View\Result\LayoutFactory $resultLayoutFactory,
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\Filesystem $filesystem,
+        \Magento\Framework\Filesystem\Driver\File $driver,
         \Magento\Framework\App\Response\Http\FileFactory $fileFactory,
         \Magento\Theme\Model\ThemeFactory $themeFactory,
         \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $themeCollectionFactory
@@ -92,6 +98,7 @@ abstract class Action extends \Magento\Backend\App\Action
         parent::__construct($context);
         $this->_coreRegistry            = $coreRegistry;
         $this->_filesystem              = $filesystem;
+        $this->_driver                  = $driver;
         $this->_fileFactory             = $fileFactory;
         $this->_resultPageFactory       = $resultPageFactory;
         $this->_resultLayoutFactory     = $resultLayoutFactory;

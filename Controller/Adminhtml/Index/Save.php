@@ -3,8 +3,8 @@
 /**
  * @Author: nguyen
  * @Date:   2020-05-31 14:56:43
- * @Last Modified by:   Alex Dong
- * @Last Modified time: 2020-06-12 16:21:00
+ * @Last Modified by:   nguyen
+ * @Last Modified time: 2020-08-08 10:06:20
  */
 
 namespace Magepow\Theme\Controller\Adminhtml\Index;
@@ -40,7 +40,10 @@ class Save extends \Magepow\Theme\Controller\Adminhtml\Action
             $themePath      = isset($data['theme_path']) ? $data['theme_path'] : $model->getThemePath();
             $themePath      = trim($themePath);
             $themePath      = str_replace(' ', '_', $themePath);;
-
+            $isRePath       = false;
+            if($model->getId()){
+                $isRePath = ($themePath != $model->getThemePath());
+            }
             if($id && in_array($themePath, $this->defaultTheme)){
                 $this->messageManager->addError(__('You can\'t edit default theme %1.', $themePath));
                 $this->_getSession()->setFormData($data);
@@ -81,10 +84,17 @@ class Save extends \Magepow\Theme\Controller\Adminhtml\Action
 
                 }
 
+                if($isRePath){
+                    $oldPath = $frontend . DIRECTORY_SEPARATOR . $model->getThemePath();
+                    $oldPath = $dir->getAbsolutePath($oldPath);
+                    $newPath = $frontend . DIRECTORY_SEPARATOR . $themePath;
+                    $newPath = $dir->getAbsolutePath($newPath);
+                    $this->_driver->rename($oldPath, $newPath);
+                }
                 $dir->writeFile($filePathXml, 'tmp');
                 $data['theme_path']    = $themePath;
                 $data['parent_id']     = $parent->getData('theme_id');
-                $data['theme_title']   = $parent->getData('theme_title');
+                $data['theme_title']   = $themeTitle;
                 $data['preview_image'] = NULL;
                 $data['area']          = 'frontend';
                 $data['is_featured']   = 0;
