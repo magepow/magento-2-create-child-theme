@@ -17,6 +17,7 @@ Child theme is understood as an inherited copy of all properties of the parent t
 
 It’s very useful when you want to customize the parent theme as required.
 - *Why should use child theme*
+
 Customizing directly on the original theme will be very dangerous. 
 
 When you update to the latest Magento version or update the theme, customizations will be lost due to the overwrite of the new version files.
