@@ -53,9 +53,11 @@ Go to “Manage Theme”, choose “Add new theme” and customize properties
 
 Run the following command in Magento 2 root folder:
 
+```
 composer require magepow/theme
 php bin/magento setup:upgrade
-php bin/magento setup:static-content:deploy -f
+php bin/magento module:enable Magepow_Theme
+```
 
 ## Donation
 
