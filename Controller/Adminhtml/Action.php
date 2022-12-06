@@ -112,7 +112,7 @@ abstract class Action extends \Magento\Backend\App\Action
     {
         $namespace = (new \ReflectionObject($this))->getNamespaceName();
         $string = strtolower(str_replace(__NAMESPACE__ . '\\','', $namespace));
-        $action =  explode('\\', $string);
+        $action =  explode('\\',(string) $string);
         $action =  array_shift($action);
         return $this->_authorization->isAllowed("Magepow_Theme::theme_$action");
     }
