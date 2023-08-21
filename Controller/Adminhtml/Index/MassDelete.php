@@ -33,7 +33,7 @@ class MassDelete extends \Magepow\Theme\Controller\Adminhtml\Action
                 $this->messageManager->addError($e->getMessage());
             }
         }
-        $resultRedirect = $this->_resultRedirectFactory->create();
+        $resultRedirect = $this->resultRedirectFactory->create();
 
         return $resultRedirect->setPath('*/*/');
     }

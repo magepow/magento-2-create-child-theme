@@ -25,7 +25,7 @@ class Save extends \Magepow\Theme\Controller\Adminhtml\Action
      */
     public function execute()
     {
-        $resultRedirect = $this->_resultRedirectFactory->create();
+        $resultRedirect = $this->resultRedirectFactory->create();
 
         if ($data = $this->getRequest()->getPostValue()) {
             $id = $this->getRequest()->getParam('theme_id');
