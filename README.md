@@ -32,11 +32,11 @@ Magepow Manage Theme provides a website featuring professional child theme creat
 
 No need to use commands, modules make it easy to manage theme in the store with just a few basic steps:
 
-![magento2-manage-theme](https://github.com/magepow/magento2-theme/blob/master/Media/magento2-manage-theme.png?raw=true)
+![magento2-manage-theme](media/magento2-manage-theme.png?raw=true)
 
 Go to “Manage Theme”, choose “Add new theme” and customize properties 
 
-![magento2-manage-theme-pro-properties](https://github.com/magepow/magento2-theme/blob/master/Media/magento2-manage-theme-properties.png?raw=true)
+![magento2-manage-theme-pro-properties](media/magento2-manage-theme-properties.png?raw=true)
 
 ### Highlight Features
 
